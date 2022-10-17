@@ -20,6 +20,7 @@
       <th>Gender</th>
       <th>Language</th>
     </tr>
+
     <c:forEach items="${studentList}" var="student">
      <tr>
 
@@ -33,11 +34,13 @@
        <c:if test="${student.gender==0}">
          <td>Female</td>
        </c:if>
+       <c:forEach items="${student.languages}" var="lang">
        <td>
-         <c:forEach items="${student.languages}" var="lang">
+
          <span>${lang}</span>
-        </c:forEach>
+
        </td>
+       </c:forEach>
      </tr>
     </c:forEach>
   </table>

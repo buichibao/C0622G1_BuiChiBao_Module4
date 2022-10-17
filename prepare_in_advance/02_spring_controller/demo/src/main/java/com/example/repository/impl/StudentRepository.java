@@ -4,10 +4,7 @@ import com.example.model.Student;
 import com.example.repository.IStudentRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Repository
 public class StudentRepository implements IStudentRepository {
@@ -24,6 +21,17 @@ public class StudentRepository implements IStudentRepository {
         List<Student> students = new ArrayList<>();
         for (Integer integer:studentMap.keySet()) {
               students.add(studentMap.get(integer));
+        }
+        return students;
+    }
+
+    @Override
+    public List<Student> searchByName(String name) {
+        List<Student> students = new ArrayList<>();
+        for (Integer integer:studentMap.keySet()) {
+            if(studentMap.get(integer).getName().toLowerCase().contains(name)){
+                students.add(studentMap.get(integer));
+            }
         }
         return students;
     }

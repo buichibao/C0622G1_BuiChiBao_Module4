@@ -8,5 +8,5 @@ public interface IStudentRepository {
 
     List<Student> findAll();
 
-
+    List<Student> searchByName(String name);
 }
