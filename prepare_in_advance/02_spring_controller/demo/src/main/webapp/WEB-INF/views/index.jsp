@@ -14,19 +14,23 @@
 
   </head>
   <body>
+   <p>${mess}</p>
   <form method="get" action="/search">
     <input type="text" name="nameStudent" />
     <button type="submit">Search</button>
   </form>
+<div class="container">
+
+
   <table class="table table-striped">
-     <tr>
-       <td>ID</td>
-       <td>Name</td>
-       <td>Gender</td>
-       <td>Language</td>
+     <tr class="text-center">
+       <th>ID</th>
+       <th>Name</th>
+       <th>Gender</th>
+       <th>Language</th>
      </tr>
      <c:forEach items="${studentList}" var="student">
-       <tr>
+       <tr class="text-center">
 
          <td>${student.id}</td>
 
@@ -49,6 +53,9 @@
        </tr>
      </c:forEach>
   </table>
+
+  <a href="/create"  type="button" class="btn btn-primary">Create Student</a>
+</div>
   </body>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </html>

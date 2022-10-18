@@ -23,4 +23,14 @@ public class StudentService implements IStudentService {
     public List<Student> searchByName(String name) {
         return iStudentRepository.searchByName(name);
     }
+
+    @Override
+    public List<String> findAllLanguage() {
+        return iStudentRepository.findAllLanguage();
+    }
+
+    @Override
+    public void save(Student student) {
+          iStudentRepository.save(student);
+    }
 }

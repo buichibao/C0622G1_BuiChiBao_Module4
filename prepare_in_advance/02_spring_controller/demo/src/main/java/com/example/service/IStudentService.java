@@ -9,4 +9,8 @@ public interface IStudentService {
     List<Student> findAll();
 
     List<Student> searchByName(String name);
+
+    List<String> findAllLanguage();
+
+    void save(Student student);
 }

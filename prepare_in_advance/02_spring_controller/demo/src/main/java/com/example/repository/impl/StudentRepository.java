@@ -10,10 +10,17 @@ import java.util.*;
 public class StudentRepository implements IStudentRepository {
     private static Map<Integer, Student> studentMap = new HashMap<>();
 
+    private static List<String> languagesList = new ArrayList<>();
+
     static {
         studentMap.put(1,new Student(1,"Ronaldo",1,new String[]{"Java","C++"}));
         studentMap.put(2,new Student(2,"Messi",1,new String[]{"C++"}));
         studentMap.put(3,new Student(3,"Son",0,new String[]{"PHP"}));
+
+        languagesList.add("JAVA");
+        languagesList.add("C++");
+        languagesList.add("PHP");
+        languagesList.add("C#");
     }
 
     @Override
@@ -34,5 +41,15 @@ public class StudentRepository implements IStudentRepository {
             }
         }
         return students;
+    }
+
+    @Override
+    public List<String> findAllLanguage() {
+        return languagesList;
+    }
+
+    @Override
+    public void save(Student student) {
+        studentMap.put(student.getId(),student);
     }
 }
