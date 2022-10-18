@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--  chỉ cần gửi id là xóa được-->
+<a href="/product">Cancel</a>
+<form th:action="@{/product/delete}" th:object="${product}" method="post">
+
+    <input type="hidden" th:field="*{id}">
+
+    <div>
+        <lable>Name</lable>
+        <input type="text" th:filed="*{name}" th:value="${product.name}">
+    </div>
+
+    <div>
+        <lable>Price</lable>
+        <input type="text" th:filed="*{price}" th:value="${product.price}">
+    </div>
+
+    <div>
+        <lable>Describe</lable>
+        <input type="text" th:filed="*{describe}" th:value="${product.describe}">
+    </div>
+
+    <div>
+        <lable>Producer</lable>
+        <input type="text" th:filed="*{producer}" th:value="${product.producer}">
+      </div>
+
+      <div>
+          <button type="submit">Delete</button>
+      </div>
+  </form>
+
+</body>
+</html>
