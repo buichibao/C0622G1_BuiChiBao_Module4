@@ -1,13 +1,18 @@
 package com.example.model;
 
-public class Product {
+import javax.persistence.*;
 
+@Entity
+public class Product {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String name;
 
     private double price;
 
+    @Column(name = "describe_product") // đổi tên trong db (thanh chỉ)
     private String describe;
 
     private String producer;

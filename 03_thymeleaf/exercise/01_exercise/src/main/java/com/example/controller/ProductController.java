@@ -69,7 +69,7 @@ public class ProductController {
 
     @PostMapping("/update")
     public String saveUpdate(@ModelAttribute Product product,RedirectAttributes redirectAttributes){
-        iProductService.save(product);
+        iProductService.update(product);
         redirectAttributes.addFlashAttribute("messUpdate","successful update");
         return "redirect:/product";
     }

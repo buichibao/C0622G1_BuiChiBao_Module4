@@ -10,6 +10,8 @@ public interface IProductRepository {
 
     void save(Product product);
 
+    void update(Product product);
+
     Product findById(int id);
 
     void delete(int id);
