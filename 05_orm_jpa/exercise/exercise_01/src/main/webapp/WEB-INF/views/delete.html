@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--  chỉ cần gửi id là xóa được-->
+<a href="/song">Cancel</a>
+<form th:action="@{/song/delete}" th:object="${song}" method="post">
+
+    <input type="hidden" th:field="*{id}">
+
+    <div>
+        <lable>Name</lable>
+        <input type="text" th:field="*{nameSong}" th:value="${song.nameSong}">
+    </div>
+
+    <div>
+        <button type="submit">Delete</button>
+    </div>
+</form>
+
+</body>
+</html>

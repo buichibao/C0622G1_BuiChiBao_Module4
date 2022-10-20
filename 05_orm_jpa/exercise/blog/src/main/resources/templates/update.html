@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="/">Back List</a>
+<form th:object="${blog}" method="post" action="/update">
+    <input type="hidden" th:field="*{id}">
+    <div>
+        <label>Title</label>
+        <input type="text" th:field="*{title}" th:value="${blog.title}">
+    </div>
+    <div>
+        <label>Author</label>
+        <input type="text" th:field="*{author}" th:value="${blog.author}">
+    </div>
+    <div>
+        <label>Date</label>
+        <input type="text" th:field="*{date}" th:value="${blog.date}">
+    </div>
+    <div>
+        <label>Content</label>
+        <input type="text" th:field="*{content}" th:value="${blog.content}">
+    </div>
+    <div>
+        <button type="submit">update</button>
+    </div>
+</form>
+</body>
+</html>
