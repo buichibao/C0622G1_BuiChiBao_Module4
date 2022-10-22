@@ -5,8 +5,8 @@
     <title>Title</title>
 </head>
 <body>
-<a href="/">Back List</a>
-  <form th:object="${blog}" method="post" action="/delete">
+<a href="/blog">Back List</a>
+  <form th:object="${blog}" method="post" action="/blog/delete">
       <input type="hidden" th:field="*{id}">
       <div>
           <label>Title</label>
@@ -17,8 +17,7 @@
           <input type="text" th:field="*{author}" th:value="${blog.author}">
       </div>
       <div>
-          <label>Date</label>
-          <input type="text" th:field="*{date}" th:value="${blog.date}">
+          <input type="date" th:field="*{date}" th:value="${blog.date}">
       </div>
       <div>
           <label>Content</label>

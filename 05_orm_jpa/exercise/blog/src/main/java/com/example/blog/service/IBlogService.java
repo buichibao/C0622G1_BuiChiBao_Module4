@@ -1,12 +1,12 @@
 package com.example.blog.service;
 
 import com.example.blog.model.Blog;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface IBlogService {
 
-    List<Blog> findAll();
+    Page<Blog> findAll(Pageable pageable);
 
     Blog findById(int id);
 
@@ -14,5 +14,6 @@ public interface IBlogService {
 
     void save(Blog blog);
 
-    void update(Blog blog);
+
+    Page<Blog> findByTitleContaining(Pageable pageable, String title);
 }

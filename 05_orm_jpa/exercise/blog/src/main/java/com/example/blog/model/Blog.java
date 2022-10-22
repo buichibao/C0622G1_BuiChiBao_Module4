@@ -1,9 +1,8 @@
 package com.example.blog.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.sql.Date;
+
 
 @Entity
 public class Blog {
@@ -15,20 +14,17 @@ public class Blog {
     private String title;
 
     private String author;
-
-    private String date;
+     // import thư viện java.sql.date
+    private Date date;
 
     private String content;
 
-    public Blog() {
-    }
 
-    public Blog(Integer id, String title, String author, String date, String content) {
-        this.id = id;
-        this.title = title;
-        this.author = author;
-        this.date = date;
-        this.content = content;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "category_id",referencedColumnName = "id")
+    private Category category;
+
+    public Blog() {
     }
 
     public Integer getId() {
@@ -55,11 +51,11 @@ public class Blog {
         this.author = author;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -69,5 +65,13 @@ public class Blog {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

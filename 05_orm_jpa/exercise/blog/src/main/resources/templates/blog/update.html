@@ -6,7 +6,7 @@
 </head>
 <body>
 <a href="/">Back List</a>
-<form th:object="${blog}" method="post" action="/update">
+<form th:object="${blog}" method="post" action="/blog/update">
     <input type="hidden" th:field="*{id}">
     <div>
         <label>Title</label>
@@ -18,11 +18,15 @@
     </div>
     <div>
         <label>Date</label>
-        <input type="text" th:field="*{date}" th:value="${blog.date}">
+        <input type="date" th:field="*{date}" th:value="${blog.date}">
     </div>
     <div>
         <label>Content</label>
         <input type="text" th:field="*{content}" th:value="${blog.content}">
+    </div>
+    <div>
+        <labe>Category</labe>
+        <input type="text" th:field="*{category.nameCategory}" th:value="${blog.category.nameCategory}">
     </div>
     <div>
         <button type="submit">update</button>
