@@ -23,7 +23,7 @@ public class BlogController {
     @GetMapping("")
     // title 1 là tên biến bên list gửi qua title 2 là biến tương tác với phương thức
     public String listBlog(@PageableDefault(value = 1) Pageable pageable,
-                           @RequestParam(value = "title",defaultValue = "") String title,
+                           @RequestParam(value = "a",defaultValue = "") String title,
                            Model model){
         model.addAttribute("blogList",iBlogService.findByTitleContaining(pageable,title));
         return "/blog/list";
