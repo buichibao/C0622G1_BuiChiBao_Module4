@@ -11,12 +11,13 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
+@RequestMapping()
 public class StudentController {
 
     @Autowired
     private IStudentService iStudentService;
 
-    @GetMapping("/")
+    @GetMapping("/student")
     public String list(@PageableDefault(value = 3)Pageable pageable,
                        @RequestParam(value = "nameStudent",defaultValue = "") String nameStudent,
                        Model model){
@@ -25,15 +26,4 @@ public class StudentController {
         return "/list";
     }
 
-    @GetMapping("/{id}-update")
-    public String showFormUpdate(@PathVariable int id,Model model){
-        model.addAttribute("student",iStudentService.findById(id));
-        return "/update";
-    }
-
-    @PostMapping("/update")
-    public String showSaveUpdate(@ModelAttribute Student student, RedirectAttributes redirectAttributes){
-        iStudentService.save(student);
-        return "redirect:/";
-    }
 }

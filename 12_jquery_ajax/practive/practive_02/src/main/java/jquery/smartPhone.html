@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="jquery-min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Blog</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        Phone
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/phone.html">Phone List</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="d-flex" role="search">
+                <input id="searchInput" class="form-control me-2" name="search" type="search" placeholder="Input Title"
+                       aria-label="Search">
+                <button id="moreBtn" class="btn btn-outline-success" type="button">More</button>
+            </form>
+        </div>
+    </div>
+</nav>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addModal">
+    Add New Phone
+</button>
+
+<table class="table table-striped container" id="productTable">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Producer</th>
+        <th>Model</th>
+        <th>Price</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td colspan="6" class="text-center">
+            <a class="btn btn-primary" href="https://www.youtube.com/watch?v=B9uCX1u35IM">Loading...</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<!-- Modal add-->
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add new phone</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container w-75">
+                    <div class="col-12">
+                        <label for="model" class="form-label">Model:</label>
+                        <input type="text" class="form-control" id="model"/>
+                    </div>
+                    <div class="col-12">
+                        <label for="producer" class="form-label">Producer:</label>
+                        <input type="text" class="form-control" id="producer"/>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <label for="price" class="form-label">Price:</label>
+                        <input type="text" class="form-control" id="price"/>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="addBtn">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel">Edit phone</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container w-75">
+                    <div class="col-12">
+                        <label for="editModel" class="form-label">Model:</label>
+                        <input type="text" class="form-control" id="editModel"/>
+                    </div>
+                    <div class="col-12">
+                        <label for="editProducer" class="form-label">Producer:</label>
+                        <input type="text" class="form-control" id="editProducer"/>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <label for="editPrice" class="form-label">Price:</label>
+                        <input type="text" class="form-control" id="editPrice"/>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="edtBtn">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        phoneList();
+        function phoneList() {
+            // setInterval() /* chu ky lap
+            $("tbody").empty();
+            $.ajax({
+                url: "http://localhost:8080/smartPhone",
+                type: "GET",
+                dataType: "json",
+
+                success: function (list) {
+                    let tr = [];
+                    for (let i = 0; i < list.length; i++) {
+                        tr.push("<tr>");
+                        tr.push("<td>" + list[i].id + "</td>");
+                        tr.push("<td>" + list[i].producer + "</td>");
+                        tr.push("<td>" + list[i].model + "</td>");
+                        tr.push("<td>" + list[i].price + "</td>");
+                        tr.push("<td id='edit'>" + "<span hidden>" + list[i].id + "</span>" + "<a class='btn btn-sm btn-warning'>Edit</a>" + "</td>");
+                        tr.push("<td id='delete'>" + "<span hidden>" + list[i].id + "</span>" + "<a class='btn btn-sm btn-danger'>Delete</a>" + "</td>");
+                        tr.push("</tr>");
+                    }
+                    $("table").append(tr.join(""));
+                }
+            })
+        }
+
+        $("#addBtn").click(function () {
+            let model = $("#model").val();
+            let producer = $("#producer").val();
+            let price = $("#price").val();
+            let newPhone = {
+                model: model,
+                producer: producer,
+                price: price
+            };
+            $.ajax({
+                url: "http://localhost:8080/smartPhone",
+                type: "POST",
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(newPhone),
+                // data: JSON.stringify({'model': model, 'producer': producer, 'price': price}),
+                success: function () {
+                    $('#addModal').modal('hide');
+                    $("tbody").empty();
+                    phoneList();
+                }
+            })
+        })
+
+        $(document).on('click','#delete', function () {
+            let id = $(this).find(":first-child").text();
+            // alert(id);
+            // setInterval() /* chu ky lap
+            $("tbody").empty();
+            $.ajax({
+                url: "http://localhost:8080/smartPhone/delete/" + id,
+                type: "DELETE",
+                contentType: 'application/json; charset=utf-8',
+
+                success: function () {
+                    $("tbody").empty();
+                    phoneList();
+                }
+            })
+        })
+
+        $(document).on('click','#edit', function () {
+            let id = $(this).find(":first-child").text();
+            // alert(id);
+            // setInterval() /* chu ky lap
+            $("tbody").empty();
+            $.ajax({
+                url: "http://localhost:8080/smartPhone/edit/" + id,
+                type: "GET",
+                contentType: 'application/json; charset=utf-8',
+                // dataType: "json",
+
+                success: function (phone) {
+                    $("#editModel").val(phone.model);
+                    $("#editProducer").val(phone.producer);
+                    $("#editPrice").val(phone.price);
+                    $("#editModal").modal('shown');
+                    // $("btn-warning").click();
+                    // $("tbody").empty();
+                    // phoneList();
+                }
+            })
+        })
+    })
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+</html>
