@@ -31,8 +31,6 @@ public class CustomerDto implements Validator {
 
     private CustomerType customerType;
 
-    private Set<Contract> contracts;
-
     public CustomerDto() {
     }
 
@@ -114,14 +112,6 @@ public class CustomerDto implements Validator {
 
     public void setCustomerType(CustomerType customerType) {
         this.customerType = customerType;
-    }
-
-    public Set<Contract> getContracts() {
-        return contracts;
-    }
-
-    public void setContracts(Set<Contract> contracts) {
-        this.contracts = contracts;
     }
 
     @Override
