@@ -44,6 +44,7 @@ public class CustomerController {
     @GetMapping("/create")
     public String showFormCreate(Model model){
         model.addAttribute("customerDto",new CustomerDto());
+        model.addAttribute("listCustomerType",iCustomerTypeService.findAll());
         return "/customer/create";
     }
 
@@ -80,6 +81,8 @@ public class CustomerController {
 
         BeanUtils.copyProperties(customer,customerDto);
 
+        model.addAttribute("listCustomerType",iCustomerTypeService.findAll());
+
         model.addAttribute("customerDto",customerDto);
 
         return "customer/update";
@@ -89,16 +92,21 @@ public class CustomerController {
     public String saveCustomerUpdate(@Validated @ModelAttribute CustomerDto customerDto,
                                BindingResult bindingResult,
                                RedirectAttributes redirectAttributes){
-//        if(bindingResult.hasFieldErrors()){
-//            return "/customer/update";
-//        }else {
+        if(bindingResult.hasFieldErrors()){
+            return "/customer/update";
+        }else {
             Customer customer = new Customer();
             BeanUtils.copyProperties(customerDto, customer);
             iCustomerService.save(customer);
             redirectAttributes.addFlashAttribute("messCreate", "Chỉnh sửa thành công" + customer.getName());
             return "redirect:/customer/list";
 
-//        }
+        }
+    }
+
+    @GetMapping("/{id}-view")
+    public String showFormView(){
+        return "/customer/view";
     }
 
 }

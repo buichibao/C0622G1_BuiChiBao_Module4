@@ -27,13 +27,15 @@
     <div class="col-12">
       <label for="b" class="form-label">Date of Birth:</label>
       <p style="color: red" th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"></p>
-      <input type="text" th:field="*{dateOfBirth}" class="form-control" id="b"/>
+      <input type="date" th:field="*{dateOfBirth}" class="form-control" id="b"/>
     </div>
 
     <div class="col-12">
-      <label for="c" class="form-label">Gender:</label>
+      <label class="form-label">Gender:</label>
+      <input type="radio" th:field="*{gender}" th:value="1"/>Male
+      <input type="radio" th:field="*{gender}" th:value="0"/>Female
+      <input type="radio" th:field="*{gender}" th:value="2"/>LGBT
       <p style="color: red" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></p>
-      <input type="text" th:field="*{gender}" class="form-control" id="c"/>
     </div>
 
     <div class="col-12">
@@ -66,15 +68,18 @@
     </div>
 
     <div class="col-12">
-      <label for="k" class="form-label">Customer Type:</label>
+      <label  class="form-label">Customer Type:</label>
       <p style="color: red" th:if="${#fields.hasErrors('customerType')}" th:errors="*{customerType}"></p>
-      <input type="text" th:field="*{customerType}" class="form-control" id="k"/>
+      <select th:field="*{customerType}">
+        <option th:each="item : ${listCustomerType}"
+                th:value="${item.id}" th:text="${item.name}"></option>
+      </select>
     </div>
 
 
     <div class="col-12 mt-3 text-center">
       <button type="submit" class="btn btn-primary">Save</button>
-      <a href="/" class="btn btn-secondary mx-3 text-white text-decoration-none">Cancel</a>
+      <a href="/customer/list" class="btn btn-secondary mx-3 text-white text-decoration-none">Cancel</a>
     </div>
   </form>
 </div>

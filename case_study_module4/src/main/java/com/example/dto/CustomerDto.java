@@ -12,7 +12,6 @@ public class CustomerDto implements Validator {
 
     private int id;
 
-    @NotBlank
     private String name;
 
     private String dateOfBirth;
@@ -27,7 +26,7 @@ public class CustomerDto implements Validator {
 
     private String address;
 
-    private boolean deleteStatus;
+    private int deleteStatus;
 
     private CustomerType customerType;
 
@@ -98,11 +97,11 @@ public class CustomerDto implements Validator {
         this.address = address;
     }
 
-    public boolean isDeleteStatus() {
+    public int getDeleteStatus() {
         return deleteStatus;
     }
 
-    public void setDeleteStatus(boolean deleteStatus) {
+    public void setDeleteStatus(int deleteStatus) {
         this.deleteStatus = deleteStatus;
     }
 

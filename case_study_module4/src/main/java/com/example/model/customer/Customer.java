@@ -27,7 +27,7 @@ public class Customer {
 
     private String address;
 
-    private boolean deleteStatus;
+    private int deleteStatus;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_type_id",referencedColumnName = "id")
@@ -119,11 +119,11 @@ public class Customer {
         this.contracts = contracts;
     }
 
-    public boolean isDeleteStatus() {
+    public int getDeleteStatus() {
         return deleteStatus;
     }
 
-    public void setDeleteStatus(boolean deleteStatus) {
+    public void setDeleteStatus(int deleteStatus) {
         this.deleteStatus = deleteStatus;
     }
 }

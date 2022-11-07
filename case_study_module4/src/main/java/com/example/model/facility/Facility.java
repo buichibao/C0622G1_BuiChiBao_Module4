@@ -38,7 +38,7 @@ public class Facility {
 
     private String facilityFree;
 
-    private boolean deleteStatus;
+    private int deleteStatus;
 
     public Facility() {
     }
@@ -147,11 +147,11 @@ public class Facility {
         this.facilityFree = facilityFree;
     }
 
-    public boolean isDeleteStatus() {
+    public int getDeleteStatus() {
         return deleteStatus;
     }
 
-    public void setDeleteStatus(boolean deleteStatus) {
+    public void setDeleteStatus(int deleteStatus) {
         this.deleteStatus = deleteStatus;
     }
 }

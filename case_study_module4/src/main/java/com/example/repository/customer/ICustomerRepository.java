@@ -37,14 +37,14 @@ public interface ICustomerRepository extends JpaRepository<Customer,Integer> {
             " and " +
             "customer.address like %:addressSearch%" +
             " and " +
-            "customer.delete_status = false ",
+            "customer.delete_status = 0 ",
             nativeQuery = true)
     Page<Customer>  searchCustomer (@Param("nameSearch") String nameSearch,
                                     @Param("emailSearch") String emailSearch,
                                     @Param("addressSearch") String addressSearch, Pageable pageable);
 
     @Modifying
-    @Query(value = "update customer set delete_status = true where id = :idDelete",nativeQuery = true)
+    @Query(value = "update customer set delete_status = 1 where id = :idDelete",nativeQuery = true)
     void deleteLogical(@Param("idDelete") Integer id);
 
 

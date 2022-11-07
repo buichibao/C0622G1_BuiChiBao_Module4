@@ -20,7 +20,7 @@ public class Contract {
 
     private String deposit;
 
-    private boolean deleteStatus;
+    private int deleteStatus;
 
     @OneToMany(mappedBy = "contract")
     private Set<ContractDetail> contractDetails;
@@ -77,11 +77,11 @@ public class Contract {
         this.contractDetails = contractDetails;
     }
 
-    public boolean isDeleteStatus() {
+    public int getDeleteStatus() {
         return deleteStatus;
     }
 
-    public void setDeleteStatus(boolean deleteStatus) {
+    public void setDeleteStatus(int deleteStatus) {
         this.deleteStatus = deleteStatus;
     }
 

@@ -15,4 +15,9 @@ public class HomeController {
     public String customer(){
         return "/customer/customerHome";
     }
+
+    @GetMapping("facility")
+    public String facility(){
+        return "/facility/facilityHome";
+    }
 }
