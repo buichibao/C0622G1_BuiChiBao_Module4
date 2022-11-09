@@ -9,6 +9,7 @@ public class AttachFacility {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(name = "name_attach")
     private String name;
 
     private String cost;

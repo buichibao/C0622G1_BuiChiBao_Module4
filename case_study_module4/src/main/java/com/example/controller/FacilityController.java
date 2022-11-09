@@ -24,6 +24,30 @@ public class FacilityController {
     @Autowired
     private IRentTypeService iRentTypeService;
 
+//    @GetMapping("/list")
+//    public String showList(@PageableDefault(value = 5) Pageable pageable,
+//                           @RequestParam(value = "nameSearch" ,defaultValue = "") String nameSearch,
+//                           Model model){
+//        model.addAttribute("listFacility",iFacilityService.searchFacility(nameSearch,pageable));
+//        model.addAttribute("facilityType",iFacilityTypeService.findAll());
+//        model.addAttribute("rentType",iRentTypeService.findAll());
+//        model.addAttribute("nameSearch",nameSearch);
+//        return "/facility/list";
+//    }
+
+    @GetMapping("/list")
+    public String showList(@PageableDefault(value = 5) Pageable pageable,
+                           @RequestParam(value = "nameSearch" ,defaultValue = "" ,required = false) String nameSearch,
+                           @RequestParam(value = "facilityType" ,defaultValue = "" ,required = false) String facilityType,
+                           Model model){
+        model.addAttribute("listFacility",iFacilityService.searchFacility2(nameSearch,facilityType,pageable));
+//        model.addAttribute("facilityType",iFacilityTypeService.findAll());
+//        model.addAttribute("rentType",iRentTypeService.findAll());
+        model.addAttribute("nameSearch",nameSearch);
+        model.addAttribute("facilityType",facilityType);
+        return "/facility/list";
+    }
+
     @GetMapping("/create")
     public String showFormCreate(Model model){
         model.addAttribute("facility",new Facility());
@@ -47,21 +71,18 @@ public class FacilityController {
     }
 
 
-
-    @GetMapping("/list")
-    public String showList(@PageableDefault(value = 5) Pageable pageable,
-                           @RequestParam(value = "nameSearch" ,defaultValue = "") String nameSearch,
-                           Model model){
-        model.addAttribute("listFacility",iFacilityService.searchFacility(nameSearch,pageable));
-        model.addAttribute("facilityType",iFacilityTypeService.findAll());
-        model.addAttribute("rentType",iRentTypeService.findAll());
-        model.addAttribute("nameSearch",nameSearch);
-        return "/facility/list";
+    @GetMapping("/update")
+    public String showFormUpdate(@RequestParam int id, Model model){
+        model.addAttribute("facility",iFacilityService.findById(id).get());
+        model.addAttribute("listFacilityType",iFacilityTypeService.findAll());
+        model.addAttribute("listRentType",iRentTypeService.findAll());
+        return "/facility/update";
     }
 
-    @GetMapping("/update")
-    public String showFormUpdate(Model model){
-        model.addAttribute("facility",new Facility());
-        return "/facility/update";
+    @PostMapping("/update")
+    public String updateFacility(@ModelAttribute Facility facility,RedirectAttributes redirectAttributes){
+        iFacilityService.save(facility);
+        redirectAttributes.addFlashAttribute("messUpdate","Cập nhật thành công "+facility.getName());
+        return "redirect:/facility/list";
     }
 }

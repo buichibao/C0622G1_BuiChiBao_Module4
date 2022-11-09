@@ -1,5 +1,6 @@
 package com.example.service.impl;
 
+import com.example.model.contract.AttachFacility;
 import com.example.model.customer.Customer;
 import com.example.repository.customer.ICustomerRepository;
 import com.example.service.ICustomerService;
@@ -32,6 +33,11 @@ public class CustomerService implements ICustomerService {
     }
 
     @Override
+    public Page<Customer> searchCustomer2(String nameSearch, String emailSearch, String customerType, Pageable pageable) {
+        return iCustomerRepository.searchCustomer2(nameSearch,emailSearch,customerType,pageable);
+    }
+
+    @Override
     public void deleteLogical(Integer id) {
         iCustomerRepository.deleteLogical(id);
     }
@@ -44,5 +50,10 @@ public class CustomerService implements ICustomerService {
     @Override
     public Optional<Customer> findById(Integer id) {
         return iCustomerRepository.findById(id);
+    }
+
+    @Override
+    public List<AttachFacility> searchId(int idSearch) {
+        return iCustomerRepository.searchId(idSearch);
     }
 }

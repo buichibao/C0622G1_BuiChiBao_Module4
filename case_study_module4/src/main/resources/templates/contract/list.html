@@ -72,21 +72,19 @@
 </div>
 
 
-<div style="align-content: center"><a class="btn btn-info" href="/facility/create">Add facility
+<div style="align-content: center"><a class="btn btn-info" href="/contract/create">Add Contract
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square"
          viewBox="0 0 16 16">
         <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
         <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
     </svg>
 </a></div>
+
 <nav class="navbar navbar-light bg-light">
     <div class="container-fluid">
-        <form class="d-flex" method="get" action="/facility/list">
+        <form class="d-flex" method="get" action="/contract/list">
 
-            <input class="form-control me-2" type="search" placeholder="Search Name Facility" aria-label="Search Name facility" name="nameSearch" th:value="${nameSearch}">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-
-            <input class="form-control me-2" type="search" placeholder="Search Facility Type" aria-label="Search facility Type" name="facilityType" th:value="${facilityType}">
+            <input class="form-control me-2" type="search" placeholder="Search Name Customer" aria-label="Search Name Customer" name="nameCustomer" th:value="${nameCustomer}">
             <button class="btn btn-outline-success" type="submit">Search</button>
 
         </form>
@@ -96,40 +94,36 @@
 <table class="table table-success table-striped">
     <tr>
         <td>STT</td>
-        <td>Tên Dịch Vụ</td>
-        <td>Chi Phí</td>
-        <td>Tiêu chuẩn Phòng</td>
-        <td>Kiểu thuê</td>
-        <td>Loại dịch vụ</td>
+        <td>Dịch Vụ</td>
+        <td>Khách hàng</td>
+        <td>Ngày bắt đầu</td>
+        <td>Ngày kết thúc</td>
+        <td>Tiền cọc</td>
 
-        <td>Sửa</td>
-        <td>Xóa</td>
-        <td>Xem</td>
+
+
     </tr>
-    <tr th:each="facility,index : ${listFacility}">
-        <td th:text="${facility.id}"></td>
-        <td th:text="${facility.name}"></td>
-        <td th:text="${facility.cost}"></td>
-        <td th:text="${facility.standardRoom}"></td>
-        <td th:text="${facility.rentType.name}"></td>
-        <td th:text="${facility.facilityType.name}"></td>
-        <td><a th:href="@{/facility/update(id=${facility.id})}"><button class="btn btn-info">Sửa</button></a></td>
+    <tr th:each="contract,index : ${listContract}">
+        <td th:text="${contract.id}"></td>
+        <td th:text="${contract.facility.name}"></td>
+        <td th:text="${contract.customer.name}"></td>
+        <td th:text="${contract.startDate}"></td>
+        <td th:text="${contract.endDate}"></td>
+        <td th:text="${contract.deposit}"></td>
 
-        <td><button th:attr="onclick=|deleteFacility('${facility.id}', '${facility.name}')|"
-                    class="btn btn-danger btn-outline-secondary btn-sm" data-bs-toggle="modal"
-                    data-bs-target="#deleteFacility">Xóa</button></td>
 
-        <td><a class="btn btn-success">Xem</a></td>
+<!--        <td><a th:href="@{/facility/update(id=${facility.id})}"><button class="btn btn-info">Sửa</button></a></td>-->
+
     </tr>
 </table>
 <div style="text-align: center">
 
-    <a th:href="@{/facility/list/(page = ${listFacility.number -1 },nameSearch=${nameSearch} ,facilityType=${facilityType})}"
-       th:if="${listFacility.hasPrevious()}">Previous</a>
-    <span th:text="${listFacility.number+1}"></span>/
-    <span th:text="${listFacility.totalPages}"></span>
-    <a th:href="@{/facility/list/(page = ${listFacility.number +1},nameSearch=${nameSearch},facilityType=${facilityType})}"
-       th:if="${listFacility.hasNext()}">Next</a>
+    <a th:href="@{/contract/list/(page = ${listContract.number -1 },nameCustomer=${nameCustomer})}"
+       th:if="${listContract.hasPrevious()}">Previous</a>
+    <span th:text="${listContract.number+1}"></span>/
+    <span th:text="${listContract.totalPages}"></span>
+    <a th:href="@{/contract/list/(page = ${listContract.number +1},nameCustomer=${nameCustomer})}"
+       th:if="${listContract.hasNext()}">Next</a>
 </div>
 
 <div class="modal fade" id="deleteFacility" tabindex="-1" aria-labelledby="exampleModalLabel1"

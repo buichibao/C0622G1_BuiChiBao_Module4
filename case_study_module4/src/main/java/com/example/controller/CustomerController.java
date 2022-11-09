@@ -26,18 +26,32 @@ public class CustomerController {
     private ICustomerTypeService iCustomerTypeService;
 
 
+//
+//    @GetMapping("/list")
+//    public String showList(@PageableDefault(value = 5) Pageable pageable,
+//                           @RequestParam(value = "nameSearch" ,defaultValue = "") String nameSearch,
+//                           @RequestParam(value = "emailSearch",defaultValue = "") String emailSearch,
+//                           @RequestParam(value = "addressSearch",defaultValue = "") String addressSearch,
+//                           Model model){
+//        model.addAttribute("listCustomer",iCustomerService.searchCustomer(nameSearch,emailSearch,addressSearch,pageable));
+////        model.addAttribute("listCustomerType",iCustomerTypeService.findAll());
+//        model.addAttribute("nameSearch",nameSearch);
+//        model.addAttribute("emailSearch",emailSearch);
+//        model.addAttribute("addressSearch",addressSearch);
+//        return "/customer/list";
+//    }
 
     @GetMapping("/list")
     public String showList(@PageableDefault(value = 5) Pageable pageable,
                            @RequestParam(value = "nameSearch" ,defaultValue = "") String nameSearch,
                            @RequestParam(value = "emailSearch",defaultValue = "") String emailSearch,
-                           @RequestParam(value = "addressSearch",defaultValue = "") String addressSearch,
+                           @RequestParam(value = "customerType",defaultValue = "") String customerType,
                            Model model){
-        model.addAttribute("listCustomer",iCustomerService.searchCustomer(nameSearch,emailSearch,addressSearch,pageable));
+        model.addAttribute("listCustomer",iCustomerService.searchCustomer2(nameSearch,emailSearch,customerType,pageable));
         model.addAttribute("listCustomerType",iCustomerTypeService.findAll());
         model.addAttribute("nameSearch",nameSearch);
         model.addAttribute("emailSearch",emailSearch);
-        model.addAttribute("addressSearch",addressSearch);
+        model.addAttribute("customerType",customerType);
         return "/customer/list";
     }
 
@@ -102,11 +116,6 @@ public class CustomerController {
             return "redirect:/customer/list";
 
         }
-    }
-
-    @GetMapping("/{id}-view")
-    public String showFormView(){
-        return "/customer/view";
     }
 
 }

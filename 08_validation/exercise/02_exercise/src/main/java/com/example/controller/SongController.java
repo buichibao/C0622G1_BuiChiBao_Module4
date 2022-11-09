@@ -21,7 +21,7 @@ public class SongController {
     private ISongService iSongService;
 
     @GetMapping("/")
-    public String listSong(@PageableDefault(value = 2)Pageable pageable,
+    public String listSong(@PageableDefault(value = 10)Pageable pageable,
                            @RequestParam (value = "nameSong",defaultValue = "")String nameSong,
                            Model model){
         model.addAttribute("nameSong",nameSong);

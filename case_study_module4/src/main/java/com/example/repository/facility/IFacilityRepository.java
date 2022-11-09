@@ -21,6 +21,12 @@ public interface IFacilityRepository extends JpaRepository<Facility,Integer> {
             nativeQuery = true)
     Page<Facility> searchFacility(@Param("nameSearch") String nameSearch , Pageable pageable);
 
+
+    @Query(value = "select * from  facility  join facility_type on facility_type.id = facility.facility_type_id where facility.name like %:nameSearch% and facility_type.name like %:facilityTypeName% and facility.delete_status = 0",nativeQuery = true)
+    Page<Facility> searchFacility2(@Param("nameSearch") String nameSearch,
+                                   @Param("facilityTypeName") String facilityTypeName,
+                                   Pageable pageable);
+
     @Modifying
     @Query(value = "update facility set delete_status = 1 where id = :idDelete",nativeQuery = true)
     void deleteLogical(@Param("idDelete") Integer id);

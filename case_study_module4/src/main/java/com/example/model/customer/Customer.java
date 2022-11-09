@@ -13,6 +13,7 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(name = "name_customer")
     private String name;
 
     private String dateOfBirth;
